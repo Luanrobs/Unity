@@ -1,0 +1,69 @@
+using System.Reflection;
+
+public class SCRIPNAME : MonoBehaviour
+{
+
+  private void Start()
+    {
+      var function = typeof("TYPENAME").GetMethod("METHODNAME", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+      function.Invoke(this, null);
+    }
+
+
+
+
+  //EXAMPLE 1
+
+  public void ItemCollected()
+    {                                            //this.name matches the name of the script, so the function with the same name will be called
+      var function = typeof(Collectable).GetMethod(this.name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+      function.Invoke(this, null);
+    }
+
+  
+  //method with the same name as the script to be called. within the context of the example could be the name of an item
+  private void SCRIPNAME()
+    {
+      Debug.Log("EXAMPLE1");
+    }
+
+
+
+
+  //EXAMPLE 2
+
+  //BindingFlags are needed to call private functions only
+
+  public void EXAMPLE2()
+    {                                            //this.name matches the name of the script, so the function with the same name will be called
+      var function = typeof(Collectable).GetMethod(METHODNAME);
+      function.Invoke(this, null);
+    }  
+
+  //necessarily public method to be called
+  public void METHODNAME()
+    {
+      Debug.Log("EXAMPLE2");
+    }
+   
+   
+   
+   
+  //EXAMPLE 3
+
+//again using BindingFlags, but storing type in a flag
+
+       void Start()
+     {
+         //returns the type of this component
+         Type thisType = this.GetType();
+         MethodInfo theMethod = thisType.GetMethod("bla", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+         theMethod.Invoke(this, null);
+     }
+ 
+     private void METHODNAME()
+     {
+         Debug.Log("EXAMPLE3");
+     }
+
+}

@@ -1,0 +1,27 @@
+//You can load a ScriptableObject directly from the folders and save it to a variable
+
+
+
+public class Collectables
+{
+  private static  Collectable[] collectables;
+	private static Collectables _instance = null;
+	public static Collectables Instance {
+		get{
+			if (_instance == null)
+				{
+					_instance = new Collectables();
+          
+          //here, in this example the ScriptableObject is loaded and stored in a variable when another script tries get a script using the Singleton method
+					collectables = Resources.FindObjectsOfTypeAll(typeof(Collectable)) as Collectable[];
+				}
+			return _instance;
+			} 
+		}
+    
+   void Start()
+   {
+    
+   }
+   
+}

@@ -5,6 +5,7 @@ public class Collectables
 {
   private static  Collectable[] collectables;
   
+  //Singleton
   private static Collectables _instance = null;
   public static Collectables Instance {
 	get{
@@ -19,6 +20,43 @@ public class Collectables
 	    } 
 	}
     
+   void Start()
+   {
+    
+   }
+   
+}
+
+
+
+//We can simplify using a constructor method that will be called when executing the "new Collectables()".
+
+
+public class Collectables
+{
+  private static  Collectable[] collectables;
+  
+  private static Collectables _instance = null;
+  public static Collectables Instance {
+	get{
+	    if (_instance == null)
+		{
+				//here the constructor is called
+		    _instance = new Collectables();
+		}
+	    return _instance;
+	    } 
+	}
+
+
+   //constructor method
+   private Collectables()
+   {
+   	//Here the load is done
+       collectables = Resources.FindObjectsOfTypeAll(typeof(Collectable)) as Collectable[];
+   }	
+	
+	
    void Start()
    {
     

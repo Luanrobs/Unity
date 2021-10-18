@@ -1,4 +1,1 @@
-# Unity_Invoke-Method-by-Stringname
-call a function by its name
-
-personal note
+# Repository created for the purpose of storing useful features in unity

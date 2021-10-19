@@ -17,3 +17,7 @@ class PrebuildVersionIncrement : IPreprocessBuildWithReport
 	}
 }
 #endif
+
+
+// More build processes reference:
+// https://www.youtube.com/watch?v=fqxinnFSUZg&ab_channel=StuartSpence

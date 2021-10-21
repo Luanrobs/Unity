@@ -1,0 +1,52 @@
+//You can load a ScriptableObject directly from the folders and save it to a variable
+//In this example the ScriptableObject is loaded and stored in a variable when a scriptableobject is modified, only in the unity editor
+//
+
+public class Collectable : ScriptableObject
+{
+
+#if UNITY_EDITOR
+
+    //OnValidate is called whenever the file is modified ///////////////////////////////////////////////////////////////
+    private void OnValidate()
+	{
+        Collectables.Instance.AddCollectable(this);
+	}
+#endif
+}
+
+
+public class Collectables : MonoBehaviour
+{
+
+	[SerializeField] private List<Collectable> collectables;
+
+//singleton
+	private static Collectables _instance;
+	public static Collectables Instance
+	{
+		get
+		{
+			if (_instance == null)
+				_instance = FindObjectOfType<Collectables>();
+			return _instance;
+		}
+	}
+
+
+#if UNITY_EDITOR
+	public void AddCollectable(Collectable collectable)
+	{
+    //Here all nulls are removed and the new scriptableobject is added  ///////////////////////////////////////////////////////////////
+    //It is important to remember that every time a scriptableobject is removed, it is necessary to modify another scriptableobject to remove the null
+    //it is possible to handle this using try cat. Or removing all nulls from the list on startup
+    
+		collectables.RemoveAll(x => x == null);
+		if (!collectables.Contains(collectable))
+		{
+			collectables.Add(collectable);
+			Debug.Log("<color=Lime>" + collectable + " Added to list</color>");
+		}
+	}
+#endif
+}

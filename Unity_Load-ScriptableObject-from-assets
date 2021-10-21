@@ -1,3 +1,5 @@
+//doesn't work well on mobile for a solution check Unity_Load-ScriptableObject-from-assets2
+
 //You can load a ScriptableObject directly from the folders and save it to a variable
 //In this example the ScriptableObject is loaded and stored in a variable when another script tries get a script using the Singleton method
 
@@ -52,7 +54,8 @@ public class Collectables
    //constructor method
    private Collectables()
    {
-   	//Here the load is done
+   	//Resources.FindObjectsOfTypeAll only works on loader objects, so we load them all before
+	Resources.LoadAll("Scripts/Collectables/ScriptableObject", typeof(Collectable));
        collectables = Resources.FindObjectsOfTypeAll(typeof(Collectable)) as Collectable[];
    }	
 	

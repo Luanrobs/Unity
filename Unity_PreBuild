@@ -1,0 +1,17 @@
+//This script is only run in the editor when building the project
+
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.Build;
+
+class MyCustomBuildProcessor : IPreprocessBuildWithReport
+{
+	public int callbackOrder { get { return 0; } }
+
+	//this method is called when building the project
+	public void OnPreprocessBuild(UnityEditor.Build.Reporting.BuildReport buildReport)
+	{
+		Collectables.Instance.AddCollectable(null); //just to ensure that no collectibles have a null value
+	}
+}
+#endif

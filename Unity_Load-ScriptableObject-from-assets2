@@ -41,6 +41,9 @@ public class Collectables : MonoBehaviour
     //It is important to remember that every time a scriptableobject is removed, it is necessary to modify another scriptableobject to remove the null
     //it is possible to handle this using try cat. Or removing all nulls from the list on startup
     
+    //An interesting way to solve it is using the script that is run when compiling the project. Calling a function to remove nulls, see PreBuild script.
+
+    
 		collectables.RemoveAll(x => x == null);
 		if (!collectables.Contains(collectable))
 		{

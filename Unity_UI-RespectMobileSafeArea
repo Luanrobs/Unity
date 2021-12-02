@@ -1,0 +1,38 @@
+//simple and elegant script that has the sole purpose of making the child objects respect the safeArea of each cell model
+//it is possible to better visualize it in action using simulator, especially useful in models with notch
+
+using UnityEngine;
+
+[RequireComponent(typeof(RectTransform))]
+public class SafeArea : MonoBehaviour
+{
+	[SerializeField][HideInInspector] RectTransform reactTransform;
+	Rect safeArea;
+	Vector2 minAnchor;
+	Vector2 maxAnchor;
+
+	private void Awake()
+	{
+		AdjustSafeArea();
+	}
+
+	private void Reset()
+	{
+		reactTransform = this.GetComponent<RectTransform>();
+	}
+
+	public void AdjustSafeArea()
+	{
+		safeArea = Screen.safeArea;
+		minAnchor = safeArea.position;
+		maxAnchor = minAnchor + safeArea.size;
+
+		minAnchor.x /= Screen.width;
+		minAnchor.y /= Screen.height;
+		maxAnchor.x /= Screen.width;
+		maxAnchor.y /= Screen.height;
+
+		reactTransform.anchorMin = minAnchor;
+		reactTransform.anchorMax = maxAnchor;
+	}
+}

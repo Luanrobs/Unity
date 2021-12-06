@@ -1,6 +1,7 @@
 //simple and elegant script that has the sole purpose of making the child objects respect the safeArea of each cell model
 //it is possible to better visualize it in action using simulator, especially useful in models with notch
 
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -11,8 +12,9 @@ public class SafeArea : MonoBehaviour
 	Vector2 minAnchor;
 	Vector2 maxAnchor;
 
-	private void Awake()
+	private IEnumerator Start()
 	{
+		yield return new WaitForEndOfFrame();
 		AdjustSafeArea();
 	}
 

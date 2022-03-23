@@ -1,3 +1,6 @@
+//reference: https://youtu.be/VprqsEsFb5w
+//adapted and optimized by me: https://github.com/Luanrobs
+
 //simple and elegant script that has the sole purpose of making the child objects respect the safeArea of each cell model
 //it is possible to better visualize it in action using simulator, especially useful in models with notch
 

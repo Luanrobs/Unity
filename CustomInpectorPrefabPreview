@@ -1,0 +1,40 @@
+//create a custom inspector for the chunks script
+//displays a 3d preview of an obj
+
+if UNITY_EDITOR
+using UnityEngine;
+using UnityEditor;
+using UnityEngine.Events;
+
+[CustomEditor(typeof(Chunks))]
+public class ChunksEditor : Editor
+{
+    private PreviewRenderUtility _previewRenderUtility;
+    Editor gameObjectEditor;
+    public override void OnInspectorGUI()
+    {
+
+        DrawDefaultInspector();
+
+        Chunks myGameEvent = (Chunks)target;
+        //GUILayout.Space(10f);
+        //if (GUILayout.Button("Test"))
+        //{
+        //    Debug.Log("Test");
+        //    //myGameEvent.Active();
+        //}
+
+        //GUILayout.Box(AssetPreview.GetAssetPreview(myGameEvent.chunks[0].chunk));
+
+
+        GameObject preview = myGameEvent.chunks[0].chunk;
+        if (preview)
+        {
+            if (gameObjectEditor == null)
+                gameObjectEditor = Editor.CreateEditor(preview);
+            gameObjectEditor.OnPreviewGUI(GUILayoutUtility.GetRect(100, 100), EditorStyles.whiteLabel);
+        }
+
+    }
+}
+#endif
